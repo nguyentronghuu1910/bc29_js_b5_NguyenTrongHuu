@@ -5,9 +5,17 @@ var currentFormat = new Intl.NumberFormat("vn-VN");
 
 // Bài tập 1
 /**
- * 
+ * - Đầu vào: cho người dùng nhập vào điểm môn 1-2-3, khu vực, đối tượng, điểm chuẩn;
+ * - Xử lý:
+ *   + Điểm tổng kết = môn-1 + môn-2 + môn-3 + khu vực + đối tượng
+ *   + xử lý điều kiện xét tuyển
+ *      - điều kiện 1: môn 1-2-3 == 0 => ko đủ điều kiện xét tuyển vì có môn ko điểm
+ *      - điều kiện 2: điểm tổng kết >= điểm chuẩn => đậu
+ *      - điều kiện 3:điểm tổng kết < điểm chuẩn => rớt
+ * - Đầu ra: show kết quả
  */
 document.getElementById("btnKQ1").onclick = function() {
+    // Đầu vào
     var mon_1 = parseInt(getEleID("mon_1").value * 1);
     var mon_2 = parseInt(getEleID("mon_2").value * 1);
     var mon_3 = parseInt(getEleID("mon_3").value * 1);
@@ -15,7 +23,7 @@ document.getElementById("btnKQ1").onclick = function() {
     var doiTuong = parseInt(getEleID("doiTuong").value * 1);
     var diemChuan = getEleID("diemChuan").value * 1;
     var diemTongKet = 0;
-
+    // xử lý
     diemTongKet = mon_1 + mon_2 + mon_3 + khuVuc + doiTuong;
     if (mon_1 == 0 || mon_2 == 0 || mon_3 == 0) {
         getEleID("txtFooter1").innerHTML = "Không đủ điểu kiện vì có môn 0 điểm!";
@@ -53,13 +61,12 @@ document.getElementById("btnKQ2").onclick = function() {
     var kw_4 = 1100;
     var kw_5 = 1300;
 
-    var khachHang = getEleID("khachHang").value * 1;
+    var tenKhachHang = getEleID("tenKhachHang").value;
     var soDien = getEleID("soDien").value * 1;
     var tongTien = 0;
 
     if (soDien <= 50) {
         tongTien = soDien * kw_1;
-        //   console.log(tongTien);
     } else if (soDien > 50 && soDien <= 100) {
         tongTien = (soDien - 50) * kw_2 + 50 * kw_1;
     } else if (soDien > 100 && soDien <= 200) {
@@ -70,6 +77,7 @@ document.getElementById("btnKQ2").onclick = function() {
         tongTien = 50 * kw_1 + 50 * kw_2 + 100 * kw_3 + 150 * kw_4 + (soDien - 50 - 50 - 100 - 150) * kw_5;
     }
 
-    getEleID("txtFooter2").innerHTML = "Tên khách hàng: " + khachHang + " Tổng tiền: " + currentFormat.format(tongTien)
+
+    getEleID("txtFooter2").innerHTML = "Tên khách hàng: " + tenKhachHang + " Tổng tiền: " + currentFormat.format(tongTien)
     "VNĐ";
 }
